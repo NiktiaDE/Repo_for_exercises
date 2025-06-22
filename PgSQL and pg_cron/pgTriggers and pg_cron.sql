@@ -68,14 +68,12 @@ BEGIN
 	
 	EXECUTE FORMAT ('COPY ( SELECT * FROM users_audit WHERE DATE(changed_at) = CURRENT_DATE) TO %L WITH CSV HEADER', file_path);
 
---Уведомление о результате операции
-	RAISE NOTICE 'Экспортированы данные за % в файл %', today_date, file_path;
-
 END;
-$$ LANGUAGE plpgsql
+$$ LANGUAGE plpgsql;
 
 
 --Планировщик на три часа ночи каждый день
 SELECT cron.schedule ('exp_daily_user_audit' , '0 3 * * *', 'export_daily_user_audit()');
---SELECT * FROM cron.job
+
+--SELECT * FROM cron.job;
 
