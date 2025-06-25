@@ -57,7 +57,7 @@ SELECT
 	COUNT(*) AS total_users_day_0,
 	COUNT(DISTINCT ue.user_id) AS returned_in_7_days,
 	--Процент удержания за 7 дней, 2 знака после запятой
-	round(100.0 * COUNT(DISTINCT ue.user_id) / COUNT(*), 2) AS retention_percent
+	round(100.0 * COUNT(DISTINCT ue.user_id) / COUNT(*), 2) AS retention_7d_percent
 FROM
 	(
 	SELECT
